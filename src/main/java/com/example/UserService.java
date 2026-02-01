@@ -27,12 +27,19 @@ public class UserService {
         System.out.println("I am never called");
     }
 
-    public void deleteUser(String username) throws Exception {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/db",
-                "root", password);
-        Statement st = conn.createStatement();
-        String query = "DELETE FROM users WHERE name = '" + username + "'";
-        st.execute(query);
+    public void deleteUser(String username) throws java.sql.SQLException {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/db", "root", password);
+            try (Statement st = conn.createStatement()) {
+            String query = "DELETE FROM users WHERE name = '" + username + "'";
+            st.execute(query);
+            }
+        } finally {
+            if (conn != null) {
+            conn.close();
+            }
+        }
     }
 
 }

@@ -3,7 +3,7 @@ package main.java.com.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalculatorTest {
+class CalculatorTest {
 
     private final Calculator calc = new Calculator();
 
